@@ -1,6 +1,8 @@
 import { rpc } from "../webSdk";
 import BigNumber from "bignumber.js";
 import { useSwapStore } from "@/store/swapStore";
+import { fetchPirceInDollar } from "./fetchPirceInDollar";
+import { useAlertStore } from "@/store/alertStore";
 
 export async function fetchSwapRate({ token1, token2, amount }: { token1: string; token2: string; amount: number; }) {
   const rpcParams = {
@@ -13,11 +15,12 @@ export async function fetchSwapRate({ token1, token2, amount }: { token1: string
 
   const poolMemo = `${token1}<>${token2}`;
 
-  return rpc.get_table_rows(rpcParams).then((rows) => {
+  return rpc.get_table_rows(rpcParams).then(async (rows) => {
     const pool = rows.rows.find((p) => p.memo === poolMemo);
 
     if (!pool || !pool.pool1 || !pool.pool2 || !pool.pool1.quantity || !pool.pool2.quantity) {
       console.error("⚠️ Pool not found!");
+      useAlertStore.getState().showAlert("Pool not found!", "error");
       return 0;
     }
 
@@ -43,8 +46,33 @@ export async function fetchSwapRate({ token1, token2, amount }: { token1: string
 
     console.log(`💰 Swap Rate: ${amount} ${token1} → ${finalToken2Out.toFixed(8)} ${token2}`);
 
-    // Update the Zustand store with the result
-    useSwapStore.getState().setSwapRate(finalToken2Out.toFixed(8)); // Set the rate in Zustand store
+    const token1Price = await fetchPirceInDollar(token1, new BigNumber(amount)).then(price => {
+      if (price) {
+        useSwapStore.getState().setSellToken({
+          priceInDollar: parseFloat(price.toString()),
+          symbol: token1
+        });
+
+        return price;
+      }
+    });
+
+    const token2Price = await fetchPirceInDollar(token2, finalToken2Out).then(price => {
+      if (price) {
+        useSwapStore.getState().setBuyToken({
+          priceInDollar: parseFloat(price.toString()),
+          symbol: token2
+        });
+
+        return price;
+      }
+    });
+
+    if (token1Price && token2Price) {
+      const rate = (token1Price / token2Price) * 100;
+      useSwapStore.getState().setSwapRate(rate.toFixed(2));
+    }
+
     return finalToken2Out.toFixed(8);
   }).catch((error) => {
     console.error("Error fetching swap rate:", error);

@@ -3,17 +3,9 @@ import { combine } from "zustand/middleware";
 
 export interface Token {
   symbol: string;
-  priceInDollar?: string;
+  priceInDollar?: number;
   amount?: string;
   imgPath?: string;
-}
-
-interface SwapStore {
-  sellToken: Token;
-  buyToken: Token;
-  marketFee?: number;
-  swapFee?: number;
-  slippage?: number;
 }
 
 interface SwapAction {
@@ -36,7 +28,7 @@ interface SwapStore {
   marketFee?: number;
   swapFee?: number;
   slippage?: number;
-  swapRate?: string;  // Add swapRate to store state
+  swapRate?: string;
 }
 
 interface SwapAction {
@@ -68,14 +60,32 @@ export const useSwapStore = create(
     (set, get) => ({
       setSellToken: (token) => {
         const currentSellToken = get().sellToken;
-        if (!currentSellToken.symbol) {
+        if (currentSellToken !== token) {
           set({ sellToken: token });
+        }
+
+        if (token.priceInDollar) {
+          set({
+            sellToken: {
+              ...currentSellToken,
+              priceInDollar: token.priceInDollar
+            }
+          })
         }
       },
       setBuyToken: (token) => {
         const currentBuyToken = get().buyToken;
-        if (!currentBuyToken.symbol) {
+        if (currentBuyToken !== token) {
           set({ buyToken: token });
+        }
+
+        if (token.priceInDollar) {
+          set({
+            buyToken: {
+              ...currentBuyToken,
+              priceInDollar: token.priceInDollar
+            }
+          })
         }
       },
       setMarketFee: (marketFee) => set({ marketFee }),

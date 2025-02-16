@@ -1,27 +1,45 @@
+import { useEffect, useState, useRef } from "react";
 import { Button, Input } from "@headlessui/react";
 import { fetchSwapRate } from "@/atoms/fetchSwapRate";
 import { useSwapStore } from "@/store/swapStore";
-import { useEffect, useState } from "react";
+import { useDialogStore } from "@/store/dialogStore";
+import { useUserStore } from "@/store/userStore";
+import { login } from "@/webSdk";
 
 export const Swap = () => {
   const [buyAmount, setBuyAmount] = useState("0.0");
+  const sellInput = useRef<HTMLInputElement | null>(null);
 
+  const { accountData } = useUserStore();
   const sellToken = useSwapStore((state) => state.getSellToken());
   const buyToken = useSwapStore((state) => state.getBuyToken());
   const setSellToken = useSwapStore((state) => state.setSellToken);
   const setBuyToken = useSwapStore((state) => state.setBuyToken);
-  // const swapRate = useSwapStore((state) => state.getSwapRate());
+  const swapRate = useSwapStore((state) => state.getSwapRate());
+  const { setDialog, setOnCloseCallBack } = useDialogStore();
 
-  // Default tokens to set if not already set
   useEffect(() => {
+    const triggerSellInputOnChange = () => {
+      console.log("Callback triggered!");
+      setTimeout(() => {
+        if (sellInput && sellInput.current) {
+          sellInput.current.focus({ preventScroll: true });
+        } else {
+          console.log("sellInput is null!");
+        }
+      }, 0);
+    };
+
+    setOnCloseCallBack(triggerSellInputOnChange);
+
     if (!sellToken.symbol) {
       setSellToken({ symbol: "XPR" });
     }
 
     if (!buyToken.symbol) {
-      setBuyToken({ symbol: "XMT" });
+      setBuyToken({ symbol: "LOAN" });
     }
-  }, [sellToken, buyToken, setSellToken, setBuyToken]);
+  }, [sellToken, buyToken, setSellToken, setBuyToken, setOnCloseCallBack]);
 
   let debounceTimer: NodeJS.Timeout | null = null;
 
@@ -49,6 +67,10 @@ export const Swap = () => {
     }, 500);
   };
 
+  const handleTokenChange = (inputType: "sell" | "buy") => {
+    setDialog(true, inputType);
+  };
+
   const containerClass =
     "bg-gray-800 text-gray-400 border rounded-xl p-4 text-1xl";
   const inputContainerClass = "flex justify-between items-center";
@@ -64,6 +86,7 @@ export const Swap = () => {
         <p>Sell</p>
         <div className={inputContainerClass}>
           <Input
+            ref={sellInput}
             id="Sell"
             placeholder="0.0"
             type="text"
@@ -71,10 +94,16 @@ export const Swap = () => {
             pattern="[0-9]*"
             className={inputClass}
             onChange={(event) => handleAmountChange(event, "Sell")}
+            onFocus={(event) => handleAmountChange(event, "Sell")}
           />
-          <Button className={buttonClass}>{sellToken.symbol}</Button>
+          <Button
+            onClick={() => handleTokenChange("sell")}
+            className={buttonClass}
+          >
+            {sellToken.symbol}
+          </Button>
         </div>
-        <p>$0</p>
+        <p>${sellToken.priceInDollar || 0}</p>
       </div>
       <div className={containerClass}>
         <p>Buy</p>
@@ -89,10 +118,28 @@ export const Swap = () => {
             className={inputClass}
             onChange={(event) => handleAmountChange(event, "Buy")}
           />
-          <Button className={buttonClass}>{buyToken.symbol}</Button>
+          <Button
+            onClick={() => handleTokenChange("buy")}
+            className={buttonClass}
+          >
+            {buyToken.symbol}
+          </Button>
         </div>
-        <p>$0</p>
+        <p>${buyToken.priceInDollar || 0}</p>
+        <p>%{swapRate}</p>
       </div>
+      {accountData?.name ? (
+        <Button className="text-2xl rounded-md bg-purple-600 py-1.5 px-3 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white">
+          Swap
+        </Button>
+      ) : (
+        <Button
+          onClick={() => login()}
+          className="text-2xl rounded-md bg-purple-600 py-1.5 px-3 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white"
+        >
+          Connect Wallet
+        </Button>
+      )}
     </div>
   );
 };
