@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 import { SwapContainer } from "@/components/swap/SwapContainer";
 import { Header } from "../components/Header";
-import { Footer } from "../components/Footer";
+// import { Footer } from "../components/Footer";
 import { setTradingPairs } from "@/atoms/tradingPairs";
 import { GlobalAlert } from "@/components/GlobalAlert";
 
@@ -22,7 +22,7 @@ export default function Home() {
           {/* { tradingPairs.map( pair => JSON.stringify(pair)) } */}
         </main>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
