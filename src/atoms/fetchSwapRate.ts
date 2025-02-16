@@ -46,32 +46,46 @@ export async function fetchSwapRate({ token1, token2, amount }: { token1: string
 
     console.log(`💰 Swap Rate: ${amount} ${token1} → ${finalToken2Out.toFixed(8)} ${token2}`);
 
-    const token1Price = await fetchPirceInDollar(token1, new BigNumber(amount)).then(price => {
+    useSwapStore.getState().setSellToken({
+      symbol: token1,
+      amount: amount,
+      contract: pool.pool1.contract
+    });
+    
+    useSwapStore.getState().setBuyToken({
+      symbol: token2,
+      amount: finalToken2Out.toNumber(),
+      contract: pool.pool2.contract
+    });
+
+    await fetchPirceInDollar(token1, new BigNumber(amount)).then(price => {
       if (price) {
         useSwapStore.getState().setSellToken({
           priceInDollar: parseFloat(price.toString()),
-          symbol: token1
+          symbol: token1,
+          amount: amount
         });
 
         return price;
       }
     });
 
-    const token2Price = await fetchPirceInDollar(token2, finalToken2Out).then(price => {
+    await fetchPirceInDollar(token2, finalToken2Out).then(price => {
       if (price) {
         useSwapStore.getState().setBuyToken({
           priceInDollar: parseFloat(price.toString()),
-          symbol: token2
+          symbol: token2,
+          amount: finalToken2Out.toNumber()
         });
 
         return price;
       }
     });
 
-    if (token1Price && token2Price) {
-      const rate = (token1Price / token2Price) * 100;
-      useSwapStore.getState().setSwapRate(rate.toFixed(2));
-    }
+    // if (token1Price && token2Price) {
+    //   const rate = (token1Price / token2Price) * 100;
+    //   useSwapStore.getState().setSwapRate(rate.toFixed(2));
+    // }
 
     return finalToken2Out.toFixed(8);
   }).catch((error) => {

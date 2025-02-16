@@ -5,7 +5,7 @@ export interface Token {
   symbol: string;
   contract: string;
   priceInDollar?: number;
-  amount?: string;
+  amount?: number;
   imgPath?: string;
 }
 

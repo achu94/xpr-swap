@@ -4,22 +4,9 @@ import { combine } from "zustand/middleware";
 export interface Token {
   symbol: string;
   priceInDollar?: number;
-  amount?: string;
+  amount?: number;
   imgPath?: string;
-}
-
-interface SwapAction {
-  setSellToken: (token: Token) => void;
-  setBuyToken: (token: Token) => void;
-  setMarketFee: (marketFee: number) => void;
-  setSwapFee: (swapFee: number) => void;
-  setSlippage: (slippage: number) => void;
-
-  getSellToken: () => Token;
-  getBuyToken: () => Token;
-  getMarketFee: () => number | undefined;
-  getSwapFee: () => number | undefined;
-  getSlippage: () => number | undefined;
+  contract?: string;
 }
 
 interface SwapStore {
@@ -60,7 +47,7 @@ export const useSwapStore = create(
     (set, get) => ({
       setSellToken: (token) => {
         const currentSellToken = get().sellToken;
-        if (currentSellToken !== token) {
+        if (token) {
           set({ sellToken: token });
         }
 
@@ -75,7 +62,7 @@ export const useSwapStore = create(
       },
       setBuyToken: (token) => {
         const currentBuyToken = get().buyToken;
-        if (currentBuyToken !== token) {
+        if (token) {
           set({ buyToken: token });
         }
 
