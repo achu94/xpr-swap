@@ -5,6 +5,7 @@ import { useSwapStore } from "@/store/swapStore";
 import { useDialogStore } from "@/store/dialogStore";
 import { useUserStore } from "@/store/userStore";
 import { login } from "@/webSdk";
+import executeSwap from "@/atoms/executeSwap";
 
 export const Swap = () => {
   const [buyAmount, setBuyAmount] = useState("0.0");
@@ -60,7 +61,7 @@ export const Swap = () => {
         token2: action === "Buy" ? sellToken.symbol : buyToken.symbol,
         amount: parseFloat(value),
       });
-
+      
       if (buyAmountReturn) {
         setBuyAmount(buyAmountReturn.toString());
       }
@@ -129,7 +130,7 @@ export const Swap = () => {
         <p>%{swapRate}</p>
       </div>
       {accountData?.name ? (
-        <Button className="text-2xl rounded-md bg-purple-600 py-1.5 px-3 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white">
+        <Button onClick={executeSwap} className="text-2xl rounded-md bg-purple-600 py-1.5 px-3 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white">
           Swap
         </Button>
       ) : (
