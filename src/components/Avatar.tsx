@@ -8,7 +8,7 @@ export const Avatar = () => {
   const setActor = useUserStore((state) => state.setActor);
   const setPermission = useUserStore((state) => state.setPermission);
   const setAccountData = useUserStore((state) => state.setAccountData);
-  const getUserAvatar = useUserStore((state) => state.getUserAvatar);
+  // const getUserAvatar = useUserStore((state) => state.getUserAvatar);
 
   // Clear the user state
   const clear = () => {
