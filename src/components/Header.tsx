@@ -14,12 +14,12 @@ export const Header = () => (
         <nav className="flex space-x-4 sm:space-x-10 justify-center pr-2">
           Swap
         </nav>
-        
-        <nav className="flex space-x-4 sm:space-x-10 justify-center pr-2">
+
+        <nav className="flex space-x-4 sm:space-x-10 justify-center pr-2 text-gray-600">
           Markets
         </nav>
-        
-        <nav className="flex space-x-4 sm:space-x-10 justify-center pr-2">
+
+        <nav className="flex space-x-4 sm:space-x-10 justify-center pr-2 text-gray-600">
           Pools
         </nav>
 
