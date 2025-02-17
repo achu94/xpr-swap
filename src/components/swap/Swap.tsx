@@ -81,7 +81,7 @@ export const Swap = () => {
     "rounded-full bg-slate-500 py-2 px-4 text-1xl text-white data-[hover]:bg-sky-500 data-[active]:bg-sky-700";
 
   return (
-    <div className="min-w-96 flex flex-col gap-2">
+    <div className="flex flex-col gap-2 px-4">
       <h1 className="text-4xl"></h1>
       <div className={containerClass}>
         <p>Sell</p>
