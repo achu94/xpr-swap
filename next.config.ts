@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
     remotePatterns: [
       {
@@ -10,6 +9,12 @@ const nextConfig: NextConfig = {
         port: "3000",
         pathname: "/**",
         search: ""
+      },
+      {
+        protocol: "https",
+        hostname: "xpr-swap.achu.best",
+        port: "",
+        pathname: "/**"
       }
     ]
   }
