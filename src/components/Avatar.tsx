@@ -8,7 +8,7 @@ export const Avatar = () => {
   const setActor = useUserStore((state) => state.setActor);
   const setPermission = useUserStore((state) => state.setPermission);
   const setAccountData = useUserStore((state) => state.setAccountData);
-  // const getUserAvatar = useUserStore((state) => state.getUserAvatar);
+  const getUserAvatar = useUserStore((state) => state.getUserAvatar);
 
   // Clear the user state
   const clear = () => {
@@ -28,11 +28,13 @@ export const Avatar = () => {
     }
 
     if (SDK.session && SDK.session.auth) {
+      const avatarBase64 = await SDK.getProtonAvatar(
+        SDK.session.auth.actor.toString()
+      );
+
       setActor(SDK.session.auth.actor.toString());
       setPermission(SDK.session.auth.permission.toString());
-      setAccountData(
-        await SDK.getProtonAvatar(SDK.session.auth.actor.toString())
-      );
+      setAccountData(avatarBase64);
     }
   };
 
@@ -55,28 +57,31 @@ export const Avatar = () => {
   }
 
   // Compute the avatar URL using the store's getter
-  const avatar = location.origin + "/proton_avatar.png";
+  const avatar = getUserAvatar();
 
   return (
     <div className="relative">
-      <div>
+      <div className="flex items-center gap-3">
+        {/* Profile Image */}
         <div
-          className="max-w-xs bg-white rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 lg:p-2 lg:rounded-md0"
+          className="bg-gray-600 rounded-full flex items-center p-2 cursor-pointer hover:bg-gray-500 transition"
           id="user-menu"
           aria-haspopup="true"
         >
           <Image
-            className="hidden sm:block h-8 w-8 rounded-full"
-            src={avatar}
-            width={100}
-            height={100}
+            className="h-10 w-10 rounded-full border-2 border-purple-600"
+            src={avatar.trim()}
+            width={40}
+            height={40}
             alt="Profile"
           />
+        </div>
 
-          <span className="ml-1 sm:ml-3 text-gray-700 text-sm font-medium lg:block">
-            {actor}
-          </span>
+        {/* User Name & Logout Button */}
+        <div className="flex items-center bg-gray-700 text-white px-4 py-2 rounded-full shadow-md gap-2">
+          <span className="text-sm font-medium">{actor}</span>
 
+          {/* Logout Icon */}
           <svg
             aria-hidden="true"
             focusable="false"
@@ -85,8 +90,9 @@ export const Avatar = () => {
             role="img"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 448 512"
-            onClick={() => logout()}
-            className="ml-2 w-4 h-4 cursor-pointer"
+            onClick={logout}
+            className="w-5 h-5 text-red-400 hover:text-red-500 transition cursor-pointer"
+            aria-label="Logout"
           >
             <path
               fill="currentColor"
