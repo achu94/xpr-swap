@@ -69,7 +69,7 @@ export const Avatar = () => {
           aria-haspopup="true"
         >
           <Image
-            className="h-10 w-10 rounded-full border-2 border-purple-600"
+            className="rounded-full border-2 border-purple-600"
             src={avatar.trim()}
             width={40}
             height={40}
