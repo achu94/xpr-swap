@@ -7,7 +7,7 @@ export function GlobalAlert() {
 
   return (
     <div
-      className={`fixed bottom-4 left-4 px-4 py-2 rounded-md shadow-md text-white transition-opacity duration-300 ${
+      className={`fixed top-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-md shadow-md text-white transition-opacity duration-300 ${
         type === "error"
           ? "bg-red-500"
           : type === "success"
