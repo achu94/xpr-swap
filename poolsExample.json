@@ -1,0 +1,590 @@
+[
+    {
+        "lt_symbol": "8,XPRBNB",
+        "creator": "otctest",
+        "memo": "XPR<>XBNB",
+        "pool1": {
+            "quantity": "0.6662 XPR",
+            "contract": "eosio.token"
+        },
+        "pool2": {
+            "quantity": "0.00001183 XBNB",
+            "contract": "xtokens"
+        },
+        "hash": "321dd2fc2e61d15364c04dd51602074d82834527531542750f1397b58683a969",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,XPRBTC",
+        "creator": "otctest",
+        "memo": "XPR<>XBTC",
+        "pool1": {
+            "quantity": "96208.5954 XPR",
+            "contract": "eosio.token"
+        },
+        "pool2": {
+            "quantity": "0.00496299 XBTC",
+            "contract": "xtokens"
+        },
+        "hash": "e86fb528688452e05556149e8c025713b51b571bcb815597707f9892d5aaeb7f",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,BNBUSD",
+        "creator": "otctest",
+        "memo": "XBNB<>XUSDC",
+        "pool1": {
+            "quantity": "0.19582991 XBNB",
+            "contract": "xtokens"
+        },
+        "pool2": {
+            "quantity": "56.465179 XUSDC",
+            "contract": "xtokens"
+        },
+        "hash": "9d150e8b69edf1a12cca82a8ca1f9d5b7bbbd5c21634fb42be90cbc0564241ac",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,XPRETH",
+        "creator": "otctest",
+        "memo": "XPR<>XETH",
+        "pool1": {
+            "quantity": "106701.3362 XPR",
+            "contract": "eosio.token"
+        },
+        "pool2": {
+            "quantity": "0.18990948 XETH",
+            "contract": "xtokens"
+        },
+        "hash": "063fe6213f0ad5cd130bffc00a0ebb5db7fb93ce2f757226992f74aef898e477",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,XPRXMT",
+        "creator": "otctest",
+        "memo": "XPR<>XMT",
+        "pool1": {
+            "quantity": "4292781.7219 XPR",
+            "contract": "eosio.token"
+        },
+        "pool2": {
+            "quantity": "22351.57064649 XMT",
+            "contract": "xtokens"
+        },
+        "hash": "ca2e2c2221b17dcde4d5fb6830b493d83539f7384726f8ea7703d31d83c8d7f0",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,ADAUSDC",
+        "creator": "otctest",
+        "memo": "XADA<>XUSDC",
+        "pool1": {
+            "quantity": "175.862127 XADA",
+            "contract": "xtokens"
+        },
+        "pool2": {
+            "quantity": "128.763643 XUSDC",
+            "contract": "xtokens"
+        },
+        "hash": "36acf7930df0f05b8009ea0c2b1b5b4fa9fe38c5b7ab3575bdbe0a3db2210948",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,BTCUSDC",
+        "creator": "syed",
+        "memo": "XBTC<>XUSDC",
+        "pool1": {
+            "quantity": "0.00272883 XBTC",
+            "contract": "xtokens"
+        },
+        "pool2": {
+            "quantity": "261.595588 XUSDC",
+            "contract": "xtokens"
+        },
+        "hash": "9fdf7834807d7433c9cdd80fe0c487b885370d3182bf7e27df15891809315233",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,LTCUSDC",
+        "creator": "otctest",
+        "memo": "XLTC<>XUSDC",
+        "pool1": {
+            "quantity": "0.07750174 XLTC",
+            "contract": "xtokens"
+        },
+        "pool2": {
+            "quantity": "11.445848 XUSDC",
+            "contract": "xtokens"
+        },
+        "hash": "40fa4cfe25bd07f79c55617b434c81315b49f8f340d52fac9833f2779bb0d2d9",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,BCHUSDC",
+        "creator": "otctest",
+        "memo": "XBCH<>XUSDC",
+        "pool1": {
+            "quantity": "0.00000000 XBCH",
+            "contract": "xtokens"
+        },
+        "pool2": {
+            "quantity": "0.000000 XUSDC",
+            "contract": "xtokens"
+        },
+        "hash": "f5e13e0d2fcb5965d913ace74f841add0a81768b5ab7874031579a0e13869cfb",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,ETHUSDC",
+        "creator": "syed",
+        "memo": "XETH<>XUSDC",
+        "pool1": {
+            "quantity": "0.42873436 XETH",
+            "contract": "xtokens"
+        },
+        "pool2": {
+            "quantity": "1197.858137 XUSDC",
+            "contract": "xtokens"
+        },
+        "hash": "1e84e77ebd637fe4f1b8e474acb28bc0472a371a8ceb635913598bbe5485bcce",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,UNIUSDC",
+        "creator": "otctest",
+        "memo": "XUNI<>XUSDC",
+        "pool1": {
+            "quantity": "0.015236 XUNI",
+            "contract": "xtokens"
+        },
+        "pool2": {
+            "quantity": "0.207763 XUSDC",
+            "contract": "xtokens"
+        },
+        "hash": "dddb2b6a6ef73ad4ec782d1988bba8966d7896febbd0c512d497ddcf67959232",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,SENUSDC",
+        "creator": "sense",
+        "memo": "XSENSE<>XUSDC",
+        "pool1": {
+            "quantity": "80300.5417 XSENSE",
+            "contract": "sense"
+        },
+        "pool2": {
+            "quantity": "1280.310895 XUSDC",
+            "contract": "xtokens"
+        },
+        "hash": "acdc1e1220cc9e71851db643954b81aad8c67a385e73c777f1387169439abe3b",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,XPRUSDC",
+        "creator": "syed",
+        "memo": "XPR<>XUSDC",
+        "pool1": {
+            "quantity": "210157415.1743 XPR",
+            "contract": "eosio.token"
+        },
+        "pool2": {
+            "quantity": "1041223.412029 XUSDC",
+            "contract": "xtokens"
+        },
+        "hash": "fb494f83194c8a1ac689517190dbb717b6a0507e1e84a6b2ef65f97b9af0ed25",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,EOSUSDC",
+        "creator": "otctest",
+        "memo": "XEOS<>XUSDC",
+        "pool1": {
+            "quantity": "201.0097 XEOS",
+            "contract": "xtokens"
+        },
+        "pool2": {
+            "quantity": "123.843277 XUSDC",
+            "contract": "xtokens"
+        },
+        "hash": "048137b065fdf6808cd68c221b26b5c8ada79066283a88138170f2a0c28674d2",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,XMTUSDC",
+        "creator": "syed",
+        "memo": "XMT<>XUSDC",
+        "pool1": {
+            "quantity": "395.51536623 XMT",
+            "contract": "xtokens"
+        },
+        "pool2": {
+            "quantity": "378.603185 XUSDC",
+            "contract": "xtokens"
+        },
+        "hash": "fb6e068e1559b6aea2a90f80808331f53ae8865eaa1f589d607fc93e12f7d23c",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,METABTC",
+        "creator": "otctest",
+        "memo": "METAL<>BTC",
+        "pool1": {
+            "quantity": "166867.73426289 METAL",
+            "contract": "xtokens"
+        },
+        "pool2": {
+            "quantity": "0.21368305 XBTC",
+            "contract": "xtokens"
+        },
+        "hash": "a31cde9a72c4bf37c491d5cabe4ee18956524a94915b9b0631463c7498e77fb9",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,METAXMD",
+        "creator": "otctest",
+        "memo": "METAL<>XMD",
+        "pool1": {
+            "quantity": "1796463.36514142 METAL",
+            "contract": "xtokens"
+        },
+        "pool2": {
+            "quantity": "221542.129830 XMD",
+            "contract": "xmd.token"
+        },
+        "hash": "1069354d04c0367f634f78a5a001882d96a3ea9d4d85dee4ef1fe5289e11dde4",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "7,DOGEUSD",
+        "creator": "syed",
+        "memo": "XDOGE<>XUSDC",
+        "pool1": {
+            "quantity": "2025.647830 XDOGE",
+            "contract": "xtokens"
+        },
+        "pool2": {
+            "quantity": "490.153565 XUSDC",
+            "contract": "xtokens"
+        },
+        "hash": "44e751621da8a74f584e6bda29823c12eb1f1ba40d7a2c5121ba06adf4e0143c",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,USDTUSD",
+        "creator": "otctest",
+        "memo": "XUSDT<>XUSDC",
+        "pool1": {
+            "quantity": "818.815900 XUSDT",
+            "contract": "xtokens"
+        },
+        "pool2": {
+            "quantity": "610.939923 XUSDC",
+            "contract": "xtokens"
+        },
+        "hash": "c45249fbb73a74da1e692fc46db291680e1a9a21da9ece3188a82d2607779dda",
+        "fee": {
+            "exchange_fee": 5,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 5000
+    },
+    {
+        "lt_symbol": "8,XPRDOGE",
+        "creator": "otctest",
+        "memo": "XPR<>XDOGE",
+        "pool1": {
+            "quantity": "85962.7254 XPR",
+            "contract": "eosio.token"
+        },
+        "pool2": {
+            "quantity": "1762.454546 XDOGE",
+            "contract": "xtokens"
+        },
+        "hash": "3f3bf213a7d48558ba16eda8cbe1920494aff54c6fcea0fe1b01341487b3280c",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,METAETH",
+        "creator": "otctest",
+        "memo": "METAL<>ETH",
+        "pool1": {
+            "quantity": "19985.46944410 METAL",
+            "contract": "xtokens"
+        },
+        "pool2": {
+            "quantity": "0.88127526 XETH",
+            "contract": "xtokens"
+        },
+        "hash": "c73e4bc343ed5dcbafb20f7bda5428287b0070054651dd5fdd3815cb9116b179",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,XPRLOAN",
+        "creator": "otctest",
+        "memo": "XPR<>LOAN",
+        "pool1": {
+            "quantity": "143803200.2192 XPR",
+            "contract": "eosio.token"
+        },
+        "pool2": {
+            "quantity": "3792033253.7695 LOAN",
+            "contract": "loan.token"
+        },
+        "hash": "76e591c9f903bd6bad7a0814e7781d4ef1bac10b7d1ef56463ac16972e2dd8ec",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,SNIPSXP",
+        "creator": "snipsswap",
+        "memo": "SNIPS<>XPR",
+        "pool1": {
+            "quantity": "5639509047.7168 SNIPS",
+            "contract": "snipcoins"
+        },
+        "pool2": {
+            "quantity": "25429044.8780 XPR",
+            "contract": "eosio.token"
+        },
+        "hash": "14ffcb20e5c06a680948870854b06ac17918c568245f20395bd7e105438fc06f",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,METAXPR",
+        "creator": "otctest",
+        "memo": "METAL<>XPR",
+        "pool1": {
+            "quantity": "6387536.93084987 METAL",
+            "contract": "xtokens"
+        },
+        "pool2": {
+            "quantity": "159012071.3731 XPR",
+            "contract": "eosio.token"
+        },
+        "hash": "8be2c63bbc1a98bff1633c62de4f6a82335fe4ab63a82adc4067031d88318658",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,LUNRXPR",
+        "creator": "otctest",
+        "memo": "LUNR<>XPR",
+        "pool1": {
+            "quantity": "23001.3795 XLUNR",
+            "contract": "xtokens"
+        },
+        "pool2": {
+            "quantity": "406032.4511 XPR",
+            "contract": "eosio.token"
+        },
+        "hash": "ce02ddaf65be6bc8e304f3d347c08b2b014e9d15c494086edc9b060327018050",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,MINTXPR",
+        "creator": "protonmint",
+        "memo": "MINT<>XPR",
+        "pool1": {
+            "quantity": "17738365.2900 MINT",
+            "contract": "protonmint"
+        },
+        "pool2": {
+            "quantity": "175173.6105 XPR",
+            "contract": "eosio.token"
+        },
+        "hash": "1d8e09fa2724a23edf6fdffb385681e95f92ab2786674eff22b0e6342583135e",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 0,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,DOGEMET",
+        "creator": "otctest",
+        "memo": "DOGE<>METAL",
+        "pool1": {
+            "quantity": "88359.380084 XDOGE",
+            "contract": "xtokens"
+        },
+        "pool2": {
+            "quantity": "173218.42090898 METAL",
+            "contract": "xtokens"
+        },
+        "hash": "c5b3aea20012bdfcd899ae946552a814adad08588a3976a12f9d483282ff2366",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 1,
+        "amplifier": 0
+    },
+    {
+        "lt_symbol": "8,XPRSTRX",
+        "creator": "strxdev",
+        "memo": "STRX<>XPR",
+        "pool1": {
+            "quantity": "12886809.9945 STRX",
+            "contract": "storex"
+        },
+        "pool2": {
+            "quantity": "4689937.7796 XPR",
+            "contract": "eosio.token"
+        },
+        "hash": "dee9c36dddff1c0210c25ebc09dace232fe6179a0a66b8c66b9fc4690f0f29ba",
+        "fee": {
+            "exchange_fee": 20,
+            "add_liquidity_fee": 0,
+            "remove_liquidity_fee": 0
+        },
+        "active": 0,
+        "amplifier": 0
+    }
+]

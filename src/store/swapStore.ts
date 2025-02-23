@@ -16,6 +16,7 @@ interface SwapStore {
   swapFee?: number;
   slippage?: number;
   swapRate?: string;
+  path?: string;
 }
 
 interface SwapAction {
@@ -24,14 +25,16 @@ interface SwapAction {
   setMarketFee: (marketFee: number) => void;
   setSwapFee: (swapFee: number) => void;
   setSlippage: (slippage: number) => void;
-  setSwapRate: (rate: string) => void; // Add action to set swap rate
+  setSwapRate: (rate: string) => void;
+  setPath: (path: string) => void;
 
   getSellToken: () => Token;
   getBuyToken: () => Token;
   getMarketFee: () => number | undefined;
   getSwapFee: () => number | undefined;
   getSlippage: () => number | undefined;
-  getSwapRate: () => string | undefined; // Getter for swap rate
+  getSwapRate: () => string | undefined;
+  getPath: () => string | undefined;
 }
 
 export const useSwapStore = create(
@@ -42,7 +45,8 @@ export const useSwapStore = create(
       marketFee: undefined,
       swapFee: undefined,
       slippage: undefined,
-      swapRate: undefined,  // Initialize swapRate in the store
+      swapRate: undefined,
+      path: undefined,
     },
     (set, get) => ({
       setSellToken: (token) => {
@@ -78,14 +82,16 @@ export const useSwapStore = create(
       setMarketFee: (marketFee) => set({ marketFee }),
       setSwapFee: (swapFee) => set({ swapFee }),
       setSlippage: (slippage) => set({ slippage }),
-      setSwapRate: (rate) => set({ swapRate: rate }), // Set swap rate in the store
+      setSwapRate: (rate) => set({ swapRate: rate }),
+      setPath: (path) => set({ path }),
 
       getSellToken: () => get().sellToken,
       getBuyToken: () => get().buyToken,
       getMarketFee: () => get().marketFee,
       getSwapFee: () => get().swapFee,
       getSlippage: () => get().slippage,
-      getSwapRate: () => get().swapRate, // Getter for swap rate
+      getSwapRate: () => get().swapRate,
+      getPath: () => get().path
     })
   )
 );

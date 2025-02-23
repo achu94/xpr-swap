@@ -59,7 +59,7 @@ export function ChooseToken() {
             </Field>
             <Field>
               <p className="text-sm text-gray-400">Trending Tokens</p>
-              <ul className="border p-4 text-lg rounded-xl bg-gray-700">
+              <ul className=" overflow-auto max-h-96 border p-4 text-lg rounded-xl bg-gray-700">
                 {tokens.map((token) => (
                   <li
                     className="text-xl p-2 hover:border hover:rounded-lg cursor-pointer"

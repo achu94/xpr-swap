@@ -1,7 +1,8 @@
-import { session } from "@/webSdk";
+// import { session } from "@/webSdk";
 import { useUserStore } from "@/store/userStore"; // Ensure correct path
 import { useAlertStore } from "@/store/alertStore";
 import { useSwapStore } from "@/store/swapStore";
+import { useWalletStore } from "@/store/walletStore";
 
 const buildOrdersObject = () => {
   const { getSellToken, getBuyToken } = useSwapStore.getState();
@@ -21,8 +22,9 @@ const buildOrdersObject = () => {
 
 const executeSwap = async () => {
   const { actor, permission } = useUserStore.getState();
+  const { session, user } = useWalletStore.getState();
 
-  if (!actor) {
+  if (!user) {
     useAlertStore.getState().showAlert("User is not logged in. Please log in first.", "error");
     return;
   }

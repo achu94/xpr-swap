@@ -6,7 +6,7 @@ export function SwapContainer() {
     <div>
       <ChooseToken />
       <h1 className="text-4xl px-4">
-        Swap <span className="text-lg">(testnet)</span>
+        Swap
       </h1>
       <Swap />
     </div>

@@ -1,10 +1,13 @@
-import { rpc } from "../webSdk";
 import BigNumber from "bignumber.js";
 import { useSwapStore } from "@/store/swapStore";
-import { fetchPirceInDollar } from "./fetchPirceInDollar";
 import { useAlertStore } from "@/store/alertStore";
+import CurrencyGraph from "./CurrencyGraph";
+import { useWalletStore } from "@/store/walletStore";
 
 export async function fetchSwapRate({ token1, token2, amount }: { token1: string; token2: string; amount: number; }) {
+
+  const rpc = useWalletStore.getState().rpc;
+
   const rpcParams = {
     code: "proton.swaps",
     scope: "proton.swaps",
@@ -16,6 +19,48 @@ export async function fetchSwapRate({ token1, token2, amount }: { token1: string
   const poolMemo = `${token1}<>${token2}`;
 
   return rpc.get_table_rows(rpcParams).then(async (rows) => {
+
+    const graph = new CurrencyGraph(rows.rows);
+
+    console.log(token1, token2, amount)
+
+    try {
+      const currency = graph.convertCurrency(token1, token2, amount);
+      console.log(currency);
+      console.log(`Converted amount: ${currency.amount}`);
+      console.log(`Conversion path: ${currency.path.join(' -> ')}`);
+
+      const priceInDollarToken1 = graph.convertCurrency(token1, "XUSDC", amount);
+      const priceInDollarToken2 = graph.convertCurrency(token2, "XUSDC", currency.amount);
+
+      const token1Price = priceInDollarToken1.amount;
+      const token2Price = priceInDollarToken2.amount;
+      const priceImpact = token1Price / token2Price;
+
+      useSwapStore.getState().setSwapRate(priceImpact.toFixed(2));
+      useSwapStore.getState().setPath(currency.path.join(' -> '))
+
+      useSwapStore.getState().setSellToken({
+        priceInDollar: parseFloat(token1Price.toFixed(4)),
+        symbol: token1,
+        amount: amount
+      });
+
+      useSwapStore.getState().setBuyToken({
+        priceInDollar: parseFloat(token2Price.toFixed(4)),
+        symbol: token2,
+        amount: parseFloat(currency.amount.toFixed(4))
+      });
+
+      return parseFloat(currency.amount.toFixed(4));
+
+
+    } catch (error) {
+      console.error(error);
+    }
+    return;
+
+
     const pool = rows.rows.find((p) => p.memo === poolMemo);
 
     if (!pool || !pool.pool1 || !pool.pool2 || !pool.pool1.quantity || !pool.pool2.quantity) {
@@ -23,6 +68,8 @@ export async function fetchSwapRate({ token1, token2, amount }: { token1: string
       useAlertStore.getState().showAlert("Pool not found!", "error");
       return 0;
     }
+
+    return;
 
     // Extract only numerical values from the pool quantities
     const x = new BigNumber(pool.pool1.quantity.split(" ")[0]);
@@ -51,41 +98,12 @@ export async function fetchSwapRate({ token1, token2, amount }: { token1: string
       amount: amount,
       contract: pool.pool1.contract
     });
-    
+
     useSwapStore.getState().setBuyToken({
       symbol: token2,
       amount: finalToken2Out.toNumber(),
       contract: pool.pool2.contract
     });
-
-    await fetchPirceInDollar(token1, new BigNumber(amount)).then(price => {
-      if (price) {
-        useSwapStore.getState().setSellToken({
-          priceInDollar: parseFloat(price.toString()),
-          symbol: token1,
-          amount: amount
-        });
-
-        return price;
-      }
-    });
-
-    await fetchPirceInDollar(token2, finalToken2Out).then(price => {
-      if (price) {
-        useSwapStore.getState().setBuyToken({
-          priceInDollar: parseFloat(price.toString()),
-          symbol: token2,
-          amount: finalToken2Out.toNumber()
-        });
-
-        return price;
-      }
-    });
-
-    // if (token1Price && token2Price) {
-    //   const rate = (token1Price / token2Price) * 100;
-    //   useSwapStore.getState().setSwapRate(rate.toFixed(2));
-    // }
 
     return finalToken2Out.toFixed(8);
   }).catch((error) => {

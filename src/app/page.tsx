@@ -6,9 +6,15 @@ import { Header } from "../components/Header";
 // import { Footer } from "../components/Footer";
 import { setTradingPairs } from "@/atoms/tradingPairs";
 import { GlobalAlert } from "@/components/GlobalAlert";
+import { useWalletStore } from "@/store/walletStore";
 
 export default function Home() {
+
+  const { reconnect } = useWalletStore();
+  
   useEffect(() => {
+    reconnect();
+
     setTradingPairs();
   }, []);
 

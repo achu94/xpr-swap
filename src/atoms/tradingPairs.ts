@@ -1,11 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useTradingPairStore, type TradingPairType } from "@/store/tradingPairStore";
 import { useTokenStore, type Token } from "@/store/tokenStore";
-import { rpc } from "../webSdk";
+// import { rpc } from "../webSdk";
+import { useWalletStore } from "@/store/walletStore";
 
 export async function setTradingPairs() {
   const addPair = useTradingPairStore.getState().addPair;
   const addToken = useTokenStore.getState().addToken;
+
+  const rpc = useWalletStore.getState().rpc;
 
   const rpcParams = {
     code: "proton.swaps",

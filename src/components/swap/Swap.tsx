@@ -3,20 +3,22 @@ import { Button, Input } from "@headlessui/react";
 import { fetchSwapRate } from "@/atoms/fetchSwapRate";
 import { useSwapStore } from "@/store/swapStore";
 import { useDialogStore } from "@/store/dialogStore";
-import { useUserStore } from "@/store/userStore";
 import executeSwap from "@/atoms/executeSwap";
+import { useWalletStore } from "@/store/walletStore";
 
 export const Swap = () => {
   const [buyAmount, setBuyAmount] = useState("0.0");
   const sellInput = useRef<HTMLInputElement | null>(null);
 
-  const { accountData } = useUserStore();
   const sellToken = useSwapStore((state) => state.getSellToken());
   const buyToken = useSwapStore((state) => state.getBuyToken());
   const setSellToken = useSwapStore((state) => state.setSellToken);
   const setBuyToken = useSwapStore((state) => state.setBuyToken);
   const swapRate = useSwapStore((state) => state.getSwapRate());
+  const swapPath = useSwapStore((state) => state.getPath());
   const { setDialog, setOnCloseCallBack } = useDialogStore();
+
+  const { session } = useWalletStore();
 
   useEffect(() => {
     const triggerSellInputOnChange = () => {
@@ -127,8 +129,9 @@ export const Swap = () => {
         </div>
         <p>${buyToken.priceInDollar || 0}</p>
         <p>%{swapRate}</p>
+        <p>{swapRate ? `${swapPath}` : ""}</p>
       </div>
-      {accountData?.name ? (
+      {session ? (
         <Button
           onClick={executeSwap}
           className="text-2xl rounded-md bg-purple-600 py-1.5 px-3 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white"
