@@ -4,7 +4,7 @@ import ProtonWebSDK, { LinkSession, ProtonWebLink, Link } from "@proton/web-sdk"
 import { JsonRpc, RpcInterfaces } from "@proton/js";
 import { useUserStore } from '@/store/userStore';
 
-const REQUEST_ACCOUNT = "achubestbp";
+const REQUEST_ACCOUNT = "achu";
 
 // // MAINNET
 // const CHAIN_ID = '384da888112027f0321850a169f737c33e53b388aad48b5adace4bab97f437e0'
