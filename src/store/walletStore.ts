@@ -7,12 +7,12 @@ import { useUserStore } from '@/store/userStore';
 const REQUEST_ACCOUNT = "achubestbp";
 
 // // MAINNET
-const CHAIN_ID = '384da888112027f0321850a169f737c33e53b388aad48b5adace4bab97f437e0'
-const ENDPOINTS = ['https://proton.greymass.com']
+// const CHAIN_ID = '384da888112027f0321850a169f737c33e53b388aad48b5adace4bab97f437e0'
+// const ENDPOINTS = ['https://proton.greymass.com']
 
 // TESTNET CONFIG
-// const CHAIN_ID = "71ee83bcf52142d61019d95f9cc5427ba6a0d7ff8accd9e2088ae2abeaf3d3dd";
-// const ENDPOINTS = ["https://protontestnet.ledgerwise.io/"];
+const CHAIN_ID = "71ee83bcf52142d61019d95f9cc5427ba6a0d7ff8accd9e2088ae2abeaf3d3dd";
+const ENDPOINTS = ["https://protontestnet.ledgerwise.io/"];
 
 // eosjs JsonRpc expects a SINGLE url string (not an array)
 const rpc = new JsonRpc(ENDPOINTS[0]);
