@@ -1,72 +1,89 @@
-// import { session } from "@/webSdk";
-import { useUserStore } from "@/store/userStore"; // Ensure correct path
 import { useAlertStore } from "@/store/alertStore";
 import { useSwapStore } from "@/store/swapStore";
 import { useWalletStore } from "@/store/walletStore";
 
+const CONTRACT_ACCOUNT = "achu";
+const ACTION_NAME = "achuswap";
+
+// small helpers
+const isEosioName = (s: string) => /^[a-z1-5.]{1,12}$/.test(s);
+const toNumber = (v: number | string | undefined) =>
+  typeof v === "number" ? v : v ? parseFloat(v) : NaN;
+const fmtAsset = (amt: number | string | undefined, symbol: string, precision = 4) => {
+  const n = toNumber(amt);
+  if (!Number.isFinite(n)) throw new Error(`Invalid amount for ${symbol}: ${amt}`);
+  return `${n.toFixed(precision)} ${symbol}`;
+};
+
+type TokenLike = {
+  symbol: string;
+  amount?: number | string;
+  contract?: string;
+  precision?: number;
+};
+
 const buildOrdersObject = () => {
   const { getSellToken, getBuyToken } = useSwapStore.getState();
 
-  const sellToken = getSellToken();
-  const buyToken = getBuyToken();
+  const sellToken: TokenLike = getSellToken();
+  const buyToken: TokenLike = getBuyToken();
 
-  return [
-    {
-      tokenContract: sellToken.contract,
-      to: "proton.swaps",
-      quantity: `${sellToken.amount?.toFixed(4)} ${sellToken.symbol}`,
-      memo: `${sellToken.symbol}${buyToken.symbol},${buyToken.amount?.toFixed(4)}`
-    }
-  ];
-}
+  // basic validations
+  if (!sellToken?.symbol) throw new Error("sellToken.symbol missing");
+  if (!buyToken?.symbol) throw new Error("buyToken.symbol missing");
 
-const executeSwap = async () => {
-  const { actor, permission } = useUserStore.getState();
-  const { session, user } = useWalletStore.getState();
-
-  if (!user) {
-    useAlertStore.getState().showAlert("User is not logged in. Please log in first.", "error");
-    return;
+  const tokenContract = sellToken.contract || "eosio.token"; // default if not provided
+  if (!isEosioName(tokenContract)) {
+    throw new Error(`tokenContract is not a valid EOSIO name: ${tokenContract}`);
   }
 
-  useAlertStore.getState().showAlert("Executing swap for user:" + actor, "info");
-  console.log("Session object:", session);
+  const sellPrecision = sellToken.precision ?? 4;
+  const buyPrecision = buyToken.precision ?? 4;
 
-  if (!session || typeof session.transact !== "function") {
-    useAlertStore.getState().showAlert("⚠️ session.transact is not available. Is the session properly initialized?", "error");
-    return;
-  }
+  const quantity = fmtAsset(sellToken.amount, sellToken.symbol, sellPrecision);
+  const desired = toNumber(buyToken.amount);
+  if (!Number.isFinite(desired)) throw new Error("buyToken.amount missing/invalid");
 
-  try {
-    const result = await session.transact(
-      {
-        actions: [
-          {
-            account: "achu",
-            name: "achuswap",
-            authorization: [
-              {
-                actor: actor,
-                permission: permission || "active",
-              },
-            ],
-            data: {
-              from: actor,
-              orders: buildOrdersObject()
-            },
-          },
-        ],
-      }
-    );
+  // memo format: "<SELL><BUY>,<BUY_AMOUNT>"
+  const memo = `${sellToken.symbol}${buyToken.symbol},${desired!.toFixed(buyPrecision)}`;
 
-    useAlertStore.getState().showAlert("✅ Transaction Success: " + result.transaction.id, "success");
-  } catch (error) {
-    useAlertStore.getState().showAlert("Transaction Failed:", "error");
-    console.error("Transaction Failed:", error);
-  }
+  const order = {
+    tokenContract,      // REQUIRED by ABI (type: name)
+    to: "proton.swaps", // destination contract/name (adjust if needed)
+    quantity,           // asset string, correct precision & symbol
+    memo                // string
+  };
+
+  return [order];
 };
 
+const executeSwap = async () => {
 
+  const { session, user } = useWalletStore.getState();
+  if (!user) { useAlertStore.getState().showAlert("Login first", "error"); return; }
+  if (!session || typeof session.transact !== "function") {
+    useAlertStore.getState().showAlert("No active wallet session", "error"); return;
+  }
 
+  const auth = session.auth;                            // PermissionLevel
+  const from = auth.actor.toString();
+
+  const orders = buildOrdersObject();
+  console.log("session.auth:", {
+    actor: auth.actor.toString(),
+    permission: auth.permission.toString(),
+  });
+
+  const res = await session.transact({
+    actions: [{
+      account: CONTRACT_ACCOUNT,                        // 'achu'
+      name: ACTION_NAME,                                // 'achuswap'
+      authorization: [auth],                            // ✅ user signs
+      data: { from, orders }                            // matches requireAuth(from)
+    }]
+  }, { broadcast: true });
+
+  console.log("signatures:", res.signatures);           // should be non-empty
+};
 
 export default executeSwap;

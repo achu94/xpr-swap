@@ -21,7 +21,7 @@ import { Serialize, JsonRpc, RpcInterfaces } from '@proton/js';
 //     ? process.env.NEXT_PUBLIC_PROTON_TESTNET === 'true'
 //     : true; // default to true for dev; set env to 'false' for mainnet
 
-const IS_TESTNET = true;
+const IS_TESTNET = false;
 
 // MAINNET
 const MAINNET_CHAIN_ID =

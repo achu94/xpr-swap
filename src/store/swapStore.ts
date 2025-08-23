@@ -50,34 +50,26 @@ export const useSwapStore = create(
     },
     (set, get) => ({
       setSellToken: (token) => {
-        const currentSellToken = get().sellToken;
-        if (token) {
-          set({ sellToken: token });
-        }
-
-        if (token.priceInDollar) {
-          set({
-            sellToken: {
-              ...currentSellToken,
-              priceInDollar: token.priceInDollar
-            }
-          })
-        }
+        if (!token) return;
+        set((state) => ({
+          sellToken: {
+            ...state.sellToken,                          // bisherige Felder behalten
+            ...token,                                    // neue/aktualisierte Felder übernehmen
+            ...(token.priceInDollar !== undefined        // 0 zulassen
+              ? { priceInDollar: token.priceInDollar }
+              : {})
+          }
+        }));
       },
       setBuyToken: (token) => {
-        const currentBuyToken = get().buyToken;
-        if (token) {
-          set({ buyToken: token });
-        }
-
-        if (token.priceInDollar) {
-          set({
-            buyToken: {
-              ...currentBuyToken,
-              priceInDollar: token.priceInDollar
-            }
-          })
-        }
+        const current = get().buyToken;
+        if (!token) return;
+        const next = {
+          ...current,
+          ...token,
+          ...(token.priceInDollar !== undefined ? { priceInDollar: token.priceInDollar } : {})
+        };
+        set({ buyToken: next });
       },
       setMarketFee: (marketFee) => set({ marketFee }),
       setSwapFee: (swapFee) => set({ swapFee }),

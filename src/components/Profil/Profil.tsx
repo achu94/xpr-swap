@@ -3,7 +3,7 @@ import { Popover, PopoverButton, PopoverPanel, } from '@headlessui/react'
 
 export default function Profile() {
 
-    const { user } = useWalletStore();
+    const { user, logout } = useWalletStore();
 
     return (
         <div className="flex justify-center">
@@ -31,7 +31,7 @@ export default function Profile() {
                         </div>
                         <div className="p-3">
                             <a className="block rounded-lg py-2 px-3 transition hover:bg-white/5" href="#">
-                                <p className="font-semibold text-white">Logout</p>
+                                <p onClick={() => logout()} className="font-semibold text-white">Logout</p>
                             </a>
                         </div>
                     </PopoverPanel>
